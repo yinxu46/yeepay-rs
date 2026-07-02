@@ -2,6 +2,12 @@
 name = "yeepay-rs"
 version = "0.1.0"
 edition = "2024"
+description = "Yeepay OpenAPI Core SDK for Rust"
+license = "MIT"
+authors = ["yinxu46 <yinxu46@qq.com>"]
+repository = "https://github.com/yinxu46/yeepay-rs"
+documentation = "https://docs.rs/yeepay-rs"
+readme = "README.md"
 
 [dependencies]
 serde = { version = "1", features = ["derive"] }
