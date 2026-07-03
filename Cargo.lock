@@ -2431,9 +2431,7 @@ dependencies = [
 
 [[package]]
 name = "yeepay-core"
-version = "0.1.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "ec51461f1711dfa42f923a98dd4eeb7e27fec2c8180a2625060807dfafa9876a"
+version = "0.1.1"
 dependencies = [
  "base64",
  "chrono",
@@ -2448,7 +2446,7 @@ dependencies = [
 
 [[package]]
 name = "yeepay-rs"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "calamine",
  "csv",
@@ -2457,6 +2455,7 @@ dependencies = [
  "serde",
  "serde_json",
  "tokio",
+ "uuid",
  "yeepay-core",
 ]
 

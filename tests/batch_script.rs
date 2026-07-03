@@ -1,12 +1,7 @@
 mod common;
-mod config;
-mod csv;
-mod xlsx;
 
-use crate::config::config;
-use crate::xlsx::{ExcelReaderTrait, read_xlsx};
+use crate::common::util::*;
 use calamine::{Data, DataType};
-use common::string_to_decimal;
 use rust_decimal::Decimal;
 use rust_decimal::prelude::Zero;
 use serde::{Deserialize, Serialize};
@@ -15,12 +10,14 @@ use std::sync::Arc;
 use tokio::sync::Semaphore;
 use tokio::task::JoinSet;
 use yeepay_rs::YeepayClient;
+use yeepay_rs::data::GlobalMerchantWrap;
 use yeepay_rs::data::order_divide::OrderDivideCompleteReq;
 
 #[tokio::test]
 async fn batch_divide() {
-    let orders = read_xlsx::<Order>("data/20250401-0420.xlsx").expect("Read Xlsx Fail");
-    // let orders = read_csv::<Order>("data/20250401-0420.csv").expect("Read Csv Fail");
+    let _ = read_xlsx::<Order>("data/20250401-0420.xlsx").expect("Read Xlsx Fail");
+
+    let orders = read_csv::<Order>("data/20250401-0420.csv").expect("Read Csv Fail");
 
     println!("Total Order Size: {}", orders.len());
 
@@ -61,8 +58,14 @@ async fn batch_divide() {
             // ✅ 可选：防止请求过快
             // tokio::time::sleep(Duration::from_millis(50)).await;
 
-            let request = OrderDivideCompleteReq::new(&api.config.merchant_no, &order_id);
-            let result = api.order_divide_complete(&request).await;
+            let req = GlobalMerchantWrap::new(
+                &api.config.merchant_no,
+                OrderDivideCompleteReq {
+                    order_id: order_id.to_string(),
+                    divide_request_id: format!("{}_D", order_id),
+                },
+            );
+            let result = api.order_divide_complete(&req).await;
 
             drop(permit); // ✅ 释放并发许可
 

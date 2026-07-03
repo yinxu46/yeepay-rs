@@ -1,6 +1,6 @@
 [package]
 name = "yeepay-rs"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2024"
 description = "Yeepay OpenAPI Core SDK for Rust"
 license = "MIT"
@@ -13,10 +13,11 @@ readme = "README.md"
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
 rust_decimal = "1"
-yeepay-core = "0"
+yeepay-core = { version = "0", path = "../yeepay-core" }
 
 [dev-dependencies]
 tokio = { version = "1", features = ["full"] }
 dotenvy = "0"
 calamine = "0"
 csv = "1"
+uuid = { version = "1", features = ['v4'] }
