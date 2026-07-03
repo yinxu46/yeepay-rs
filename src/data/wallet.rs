@@ -19,12 +19,14 @@ pub struct WalletQueryReq {
 }
 
 impl WalletQueryReq {
+    /// 通过商户用户ID查询
     pub fn from_merchant_user_id(merchant_user_id: &str) -> Self {
         Self {
             external_user_id: Some(merchant_user_id.to_string()),
             member_no: None,
         }
     }
+    /// 通过易宝会员号查询
     pub fn from_member_no(member_no: &str) -> Self {
         Self {
             external_user_id: None,
@@ -64,6 +66,7 @@ pub struct WalletQueryResp {
     /// - 有效(VALID)
     /// - 失效(INVALID)
     pub renew_status: Option<String>,
+    /// extra
     #[serde(default, flatten)]
     pub extra: Option<HashMap<String, Value>>,
 }
@@ -94,6 +97,7 @@ pub struct WalletIndexReq {
 pub struct WalletIndexResp {
     /// 钱包地址
     pub url: Option<String>,
+    /// extra
     #[serde(default, flatten)]
     pub extra: Option<HashMap<String, Value>>,
 }
@@ -126,6 +130,7 @@ pub struct WalletCancelReq {
 #[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct WalletCancelResp {
+    /// extra
     #[serde(default, flatten)]
     pub extra: Option<HashMap<String, Value>>,
 }
@@ -144,6 +149,7 @@ pub struct FreePaymentAgreementQueryReq {
 pub struct FreePaymentAgreementQueryResp {
     /// 协议状态：INVALID OR VALID
     pub agreement_status: Option<InvalidOrValid>,
+    /// extra
     #[serde(default, flatten)]
     pub extra: Option<HashMap<String, Value>>,
 }
@@ -169,6 +175,7 @@ pub struct FreePaymentAgreementRequestReq {
 pub struct FreePaymentAgreementRequestResp {
     /// url: 跳转地址
     pub url: Option<String>,
+    /// extra
     #[serde(default, flatten)]
     pub extra: Option<HashMap<String, Value>>,
 }
@@ -199,13 +206,16 @@ pub struct TransferB2CMarketReq {
     /// - 转出方承担手续费(OUTSIDE)、转账接收方承担手续费(INSIDE)
     #[serde(skip_serializing_if = "Option::is_none")]
     pub fee_charge_side: Option<String>,
+    /// 服务器异步通知地址
     #[serde(skip_serializing_if = "Option::is_none")]
     pub notify_url: Option<String>,
+    /// 转账备注
     #[serde(skip_serializing_if = "Option::is_none")]
     pub remark: Option<String>,
 }
 
 impl TransferB2CMarketReq {
+    /// 创建 B2C 转帐
     pub fn new(merchant_no: &str, user_id: &str, request_no: &str, amount: Decimal) -> Self {
         Self {
             from_merchant_no: merchant_no.to_string(),
@@ -241,6 +251,7 @@ pub struct TransferB2CMarketResp {
     pub order_no: Option<String>,
     /// 转账订单金额
     pub order_amount: Option<Decimal>,
+    /// extra
     #[serde(default, flatten)]
     pub extra: Option<HashMap<String, Value>>,
 }
@@ -291,7 +302,7 @@ pub struct TransferB2CQueryResp {
     /// 转入方易宝用户编号
     /// - 转入方易宝用户编号
     pub to_member_no: Option<String>,
-
+    /// extra
     #[serde(default, flatten)]
     pub extra: Option<HashMap<String, Value>>,
 }

@@ -3,6 +3,7 @@ use serde::{Deserialize, Serialize};
 use serde_json::Value;
 use std::collections::HashMap;
 
+/// 订单退款
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct OrderRefundReq {
@@ -24,6 +25,7 @@ pub struct OrderRefundReq {
     pub memo: Option<String>,
 }
 
+/// 订单退款响应
 #[derive(Debug, Deserialize)]
 pub struct OrderRefundResp {
     /// 商户收款订单号
@@ -65,10 +67,12 @@ pub struct OrderRefundResp {
     pub refund_cs_finish_date: Option<String>,
     /// 信用分单号
     pub credit_order_id: Option<String>,
+    /// extra
     #[serde(default, flatten)]
-    pub extra: Option<HashMap<String, serde_json::Value>>,
+    pub extra: Option<HashMap<String, Value>>,
 }
 
+/// 订单退款查询
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct OrderRefundQueryReq {
@@ -78,6 +82,7 @@ pub struct OrderRefundQueryReq {
     pub refund_request_id: String,
 }
 
+/// 订单退款查询响应
 #[derive(Debug, Deserialize)]
 pub struct OrderRefundQueryResp {
     /// 商户收款请求号
@@ -132,6 +137,7 @@ pub struct OrderRefundQueryResp {
     /// - POS:刷卡支付
     /// - YZS:一站式还款
     pub payment_method: Option<String>,
+    /// extra
     #[serde(default, flatten)]
-    pub extra: Option<HashMap<String, serde_json::Value>>,
+    pub extra: Option<HashMap<String, Value>>,
 }

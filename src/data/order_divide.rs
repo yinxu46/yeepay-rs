@@ -4,28 +4,42 @@ use serde::{Deserialize, Serialize};
 use serde_json::Value;
 use std::collections::HashMap;
 
+/// 分账完成
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct OrderDivideCompleteReq {
+    /// 商户收款请求号: 原支付订单的商户订单号
     pub order_id: String,
+    /// 商户分账请求号
     pub divide_request_id: String,
 }
 
+/// 分账完成响应
 #[derive(Debug, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct OrderDivideCompleteResp {
+    /// 商户订单号: 原支付订单的商户订单号
     pub order_id: Option<String>,
+    /// 商户分账请求号
     pub divide_request_id: Option<String>,
+    /// 分账状态
     pub divide_status: Option<String>,
+    /// 分账完成时间
     pub divide_success_date: Option<String>,
+    /// 分账金额
     pub amount: Option<Decimal>,
+    /// 易宝系统单号
     pub biz_system_no: Option<String>,
+    /// 易宝系统单号
     pub unique_order_no: Option<String>,
+    /// 创建时间
     pub create_date: Option<String>,
+    /// extra
     #[serde(default, flatten)]
     pub extra: Option<HashMap<String, Value>>,
 }
 
+/// 分账申请
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct OrderDivideApplyReq {
@@ -58,13 +72,14 @@ pub struct OrderDivideApplyReq {
     pub divide_rule: Option<OrderDivideRule>,
 }
 
+/// 分账明细
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct OrderDivideDetail {
-    // ledgerNoFrom：分账发起方编号，非必填。不填默认为收款商编，长度不能超过 32 字节。
+    /// ledgerNoFrom：分账发起方编号，非必填。不填默认为收款商编，长度不能超过 32 字节。
     #[serde(skip_serializing_if = "Option::is_none")]
     pub ledger_no_from: Option<String>,
-    // ledgerNo: 分账接收方编号，必填。分账属性为分账给商户时，为接收分账资金的易宝商户编号；分账属性为分账给个人会员时，为接收分账资金的易宝会员，长度不能超过 32 字节
+    /// ledgerNo: 分账接收方编号，必填。分账属性为分账给商户时，为接收分账资金的易宝商户编号；分账属性为分账给个人会员时，为接收分账资金的易宝会员，长度不能超过 32 字节
     pub ledger_no: String,
     /// 分账金额: 分账金额，按金额分账时必填，两位小数，不可为0；按比例分账时不可填。
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -72,11 +87,12 @@ pub struct OrderDivideDetail {
     /// 分账比例: 分账比例，按比例分账时必填，最大支持两位小数，必须大于 0 小于 100，且所有分账明细比例之和必须等于 100，按金额分账时不可填。
     #[serde(skip_serializing_if = "Option::is_none")]
     pub proportion: Option<Decimal>,
-    // divideDetailDesc: 分账说明，非必填，长度不能超过 128 字节。
+    /// divideDetailDesc: 分账说明，非必填，长度不能超过 128 字节。
     #[serde(skip_serializing_if = "Option::is_none")]
     pub divide_detail_desc: Option<String>,
-    // ledgerType: 分账属性，非必填。可选项如下：MERCHANT2MERCHANT（分账给商户），MERCHANT2MEMBER（分账给个人会员）。不填默认分账给商户
+    /// ledgerType: 分账属性，非必填。可选项如下：MERCHANT2MERCHANT（分账给商户），MERCHANT2MEMBER（分账给个人会员）。不填默认分账给商户
     pub ledger_type: OrderDivideLedgerType,
+    /// extra
     #[serde(default, flatten, skip_serializing_if = "Option::is_none")]
     pub extra: Option<HashMap<String, Value>>,
 }
@@ -111,6 +127,7 @@ impl OrderDivideDetail {
     }
 }
 
+/// 分账类型
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub enum OrderDivideLedgerType {
     /// 商户分账给商户
@@ -121,12 +138,15 @@ pub enum OrderDivideLedgerType {
     MERCHANT2RECEIVER,
 }
 
+/// 分账申请响应
 #[derive(Debug, Deserialize)]
 pub struct OrderDivideApplyResp {
+    /// extra
     #[serde(default, flatten)]
     pub extra: Option<HashMap<String, Value>>,
 }
 
+/// 分账查询
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct OrderDivideQueryReq {
@@ -136,17 +156,25 @@ pub struct OrderDivideQueryReq {
     pub divide_request_id: String,
 }
 
+/// 分账查询响应
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct OrderDivideQueryResp {
+    /// 商户收款请求号
     pub order_id: String,
+    /// 商户分账请求号
     pub divide_request_id: String,
+    /// 易宝系统单号
     pub unique_order_no: Option<String>,
+    /// 状态
     pub status: Option<String>,
+    /// 分账详情
     pub divide_detail: Option<Vec<OrderDivideDetail>>,
+    /// 创建时间
     pub create_date: Option<String>,
+    /// 分账成功时间
     pub divide_success_date: Option<String>,
-
+    /// extra
     #[serde(default, flatten)]
     pub extra: Option<HashMap<String, Value>>,
 }
@@ -165,17 +193,19 @@ pub struct OrderDivideBackReq {
     pub divide_back_detail: Vec<OrderDivideBackDetail>,
 }
 
+/// 分账退回明细
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct OrderDivideBackDetail {
-    // amount: 退回金额
+    /// amount: 退回金额
     pub amount: Decimal,
-    // divideBackReason: 退回原因
+    /// divideBackReason: 退回原因
     pub divide_back_reason: String,
-    // divideDetailNo: 易宝分账明细单号,分账完成后易宝返回
+    /// divideDetailNo: 易宝分账明细单号,分账完成后易宝返回
     pub divide_detail_no: String,
 }
 
+/// 分账退回响应
 #[derive(Debug, Deserialize)]
 pub struct OrderDivideBackResp {
     /// 业务方标识
@@ -219,10 +249,12 @@ pub struct OrderDivideBackResp {
     pub divide_back_account_detail: Option<Value>,
     /// 申请分账资金归还成功时间
     pub divide_back_success_date: Option<String>,
+    /// extra
     #[serde(default, flatten)]
     pub extra: Option<HashMap<String, Value>>,
 }
 
+/// 分账退回查询
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct OrderDivideBackQueryReq {
@@ -232,6 +264,7 @@ pub struct OrderDivideBackQueryReq {
     pub divide_back_request_id: String,
 }
 
+/// 分账退回查询响应
 #[derive(Debug, Deserialize)]
 pub struct OrderDivideBackQueryResp {
     /// 业务方标识
@@ -275,7 +308,9 @@ pub struct OrderDivideBackQueryResp {
     ///
     /// 示例值：[{"ledgerNo":"123456678","debitAmount":"10.01","accountType":"SETTLE_ACCOUNT"}]
     pub divide_back_account_detail: Option<Value>,
+    /// 申请分账资金归还成功时间
     pub divide_back_success_date: Option<String>,
+    /// extra
     #[serde(default, flatten)]
     pub extra: Option<HashMap<String, Value>>,
 }

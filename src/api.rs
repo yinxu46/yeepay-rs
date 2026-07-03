@@ -10,7 +10,7 @@ use yeepay_core::{YeepayClientTrait, get, post_form};
 get!(
     /// # 钱包账户信息查询
     ///
-    /// https://open.yeepay.com/docs/products/ptssfk/api/get__rest__v1.0__m-wallet__member__query
+    /// <https://open.yeepay.com/docs/products/ptssfk/api/get__rest__v1.0__m-wallet__member__query>
     ///
     /// - body: [WalletQueryReq]
     /// - return: [WalletQueryResp]
@@ -24,7 +24,7 @@ get!(
 post_form!(
     /// # 钱包注册/登录接口
     ///
-    /// https://open.yeepay.com/docs/products/ptssfk/api/post__rest__v2.0__m-wallet__wallet__index
+    /// <https://open.yeepay.com/docs/products/ptssfk/api/post__rest__v2.0__m-wallet__wallet__index>
     ///
     /// - body: [WalletIndexReq]
     /// - return: [WalletIndexResp]
@@ -40,7 +40,7 @@ post_form!(
     ///
     /// 商户注销会员钱包功能
     ///
-    /// https://open.yeepay.com/docs/products/ptssfk/api/post__rest__v1.0__m-wallet__wallet__cancel
+    /// <https://open.yeepay.com/docs/products/ptssfk/api/post__rest__v1.0__m-wallet__wallet__cancel>
     ///
     /// - body: [WalletIndexReq]
     /// - return: [WalletIndexResp]
@@ -66,7 +66,7 @@ post_form!(
     ///
     /// 商户与用户之间发生的交易行为，商户可向用户的钱包账户转账，商户调用此接口完成转账行为
     ///
-    /// https://open.yeepay.com/docs/products/ptssfk/api/post__rest__v1.0__m-wallet__transfer__b2c__market
+    /// <https://open.yeepay.com/docs/products/ptssfk/api/post__rest__v1.0__m-wallet__transfer__b2c__market>
     ///
     /// - body: [TransferB2CMarketReq]
     /// - return: [TransferB2CMarketResp]
@@ -83,7 +83,7 @@ post_form!(
     ///
     /// 商户通过请求该接口查询商户向用户转账的订单结果
     ///
-    /// https://open.yeepay.com/docs/products/ptssfk/api/get__rest__v1.0__m-wallet__transfer__b2c__query
+    /// <https://open.yeepay.com/docs/products/ptssfk/api/get__rest__v1.0__m-wallet__transfer__b2c__query>
     ///
     /// - body: [TransferB2CQueryReq]
     /// - return: [TransferB2CQueryResp]
@@ -98,7 +98,7 @@ post_form!(
 post_form!(
     /// # 开通免密支付
     ///
-    /// https://open.yeepay.com/docs/products/ptssfk/api/post__rest__v1.0__m-wallet__agreement__payment-request
+    /// <https://open.yeepay.com/docs/products/ptssfk/api/post__rest__v1.0__m-wallet__agreement__payment-request>
     ///
     /// - body: [FreePaymentAgreementRequestReq]
     /// - return: [FreePaymentAgreementRequestResp]
@@ -112,7 +112,7 @@ post_form!(
 post_form!(
     /// # 免密支付协议查询
     ///
-    /// https://open.yeepay.com/docs/products/ptssfk/api/post__rest__v1.0__m-wallet__agreement__payment-query
+    /// <https://open.yeepay.com/docs/products/ptssfk/api/post__rest__v1.0__m-wallet__agreement__payment-query>
     ///
     /// - body: [FreePaymentAgreementQueryReq]
     /// - return: [FreePaymentAgreementQueryResp]
@@ -126,7 +126,7 @@ post_form!(
 post_form!(
     /// # 收银台统一下单
     ///
-    /// https://open.yeepay.com/docs/products/ptssfk/api/post__rest__v1.0__cashier__unified__order
+    /// <https://open.yeepay.com/docs/products/ptssfk/api/post__rest__v1.0__cashier__unified__order>
     ///
     /// - body: [OrderCreateReq]
     /// - return: [OrderCreateResp]
@@ -140,7 +140,7 @@ post_form!(
 get!(
     /// # 查询订单
     ///
-    /// https://open.yeepay.com/docs/products/ptssfk/api/get__rest__v1.0__trade__order__query
+    /// <https://open.yeepay.com/docs/products/ptssfk/api/get__rest__v1.0__trade__order__query>
     ///
     /// - body: [OrderQueryReq]
     /// - return: [OrderQueryResp]
@@ -154,7 +154,7 @@ get!(
 post_form!(
     /// # 关闭订单
     ///
-    /// https://open.yeepay.com/docs/products/ptssfk/api/post__rest__v1.0__trade__order__close
+    /// <https://open.yeepay.com/docs/products/ptssfk/api/post__rest__v1.0__trade__order__close>
     ///
     /// - body: [OrderCloseReq]
     /// - return: [OrderCloseResp]
@@ -168,7 +168,7 @@ post_form!(
 post_form!(
     /// # 订单退款
     ///
-    /// https://open.yeepay.com/docs/products/ptssfk/api/post__rest__v1.0__trade__refund
+    /// <https://open.yeepay.com/docs/products/ptssfk/api/post__rest__v1.0__trade__refund>
     ///
     /// 使用说明
     /// - 1.订单状态为“SUCCESS”时才能发起退款。请勿频繁调用，两笔退款请求之间请间隔3s发起。
@@ -197,7 +197,7 @@ get!(
     ///
     /// 提交退款申请后，调用该接口查询退款状态
     ///
-    /// https://open.yeepay.com/docs/products/ptssfk/api/get__rest__v1.0__trade__refund__query
+    /// <https://open.yeepay.com/docs/products/ptssfk/api/get__rest__v1.0__trade__refund__query>
     ///
     /// - body: [OrderRefundQueryReq]
     /// - return: [OrderRefundQueryResp]
@@ -211,7 +211,7 @@ get!(
 post_form!(
     /// # 申请订单分账
     ///
-    /// https://open.yeepay.com/docs/products/ptssfk/api/post__rest__v1.0__divide__apply
+    /// <https://open.yeepay.com/docs/products/ptssfk/api/post__rest__v1.0__divide__apply>
     ///
     /// - body: [OrderDivideApplyReq]
     /// - return: [OrderDivideApplyResp]
@@ -225,7 +225,7 @@ post_form!(
 get!(
     /// # 订单分账查询
     ///
-    /// https://open.yeepay.com/docs/products/ptssfk/api/get__rest__v1.0__divide__query
+    /// <https://open.yeepay.com/docs/products/ptssfk/api/get__rest__v1.0__divide__query>
     ///
     /// - body: [OrderDivideQueryReq]
     /// - return: [OrderDivideQueryResp]
@@ -243,7 +243,7 @@ post_form!(
     ///
     /// 注意：分账订单的退款与分账资金归还并无强耦合，分账资金归还可先于退款发起，可后于退款发起，或者根据分账接收方与商户的约定，不发起分账资金归还。
     ///
-    /// https://open.yeepay.com/docs/products/ptssfk/api/post__rest__v1.0__divide__back
+    /// <https://open.yeepay.com/docs/products/ptssfk/api/post__rest__v1.0__divide__back>
     ///
     /// - body: [OrderDivideBackReq]
     /// - return: [OrderDivideBackResp]
@@ -257,7 +257,7 @@ post_form!(
 get!(
     /// # 订单分账资金退回查询
     ///
-    /// https://open.yeepay.com/docs/products/ptssfk/api/get__rest__v1.0__divide__back__query
+    /// <https://open.yeepay.com/docs/products/ptssfk/api/get__rest__v1.0__divide__back__query>
     ///
     /// - body: [OrderDivideBackQueryReq]
     /// - return: [OrderDivideBackQueryResp]
@@ -273,7 +273,7 @@ post_form!(
     ///
     /// 订单后续不需要再进行分账，可直接调用此接口将订单剩余可分账金额全部给收款商户
     ///
-    /// https://open.yeepay.com/docs/products/ptssfk/api/post__rest__v1.0__divide__complete
+    /// <https://open.yeepay.com/docs/products/ptssfk/api/post__rest__v1.0__divide__complete>
     ///
     /// - body: [OrderDivideCompleteReq]
     /// - return: [OrderDivideCompleteResp]
