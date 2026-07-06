@@ -1,8 +1,6 @@
 //! # yeepay-rs
 //!
-//! [易宝支付(Yeepay)](https://open.yeepay.com/) Rust SDK，封装易宝 API 签名、请求与响应解析。
-//!
-//!
+//! [易宝支付(Yeepay)](https://open.yeepay.com/) Rust SDK (RSA版)，封装易宝 API 签名、请求与响应解析。
 //!
 //!
 //! ## 接口列表
@@ -28,7 +26,6 @@
 //! | 订单分账完成        | [`order_divide_complete`](YeepayClient::order_divide_complete)                       | 标记分账结束，剩余金额归收款商户 |
 //!
 //!
-//!
 //! ## 使用示例
 //!
 //! ```rust
@@ -37,7 +34,26 @@
 //! use yeepay_rs::data::order_create::*;
 //! use rust_decimal::Decimal;
 //!
-//! fn config() -> YeepayConfig {}
+//! fn config() -> YeepayConfig {
+//!     YeepayConfig {
+//!         /// endpoint
+//!         endpoint: "https://openapi.yeepay.com/yop-center".to_string()
+//!         /// yos endpoint
+//!         yos_endpoint: "https://yos.yeepay.com/yop-center".to_string(),
+//!         /// 签名协议版本
+//!         protocol_version: "yop-auth-v2".to_string(),
+//!         /// 过期时间
+//!         expired_seconds: 1800,
+//!         /// appkey
+//!         app_key: "app_key".to_string(),
+//!         /// 商户编号
+//!         merchant_no: "merchant_no".to_string(),
+//!         /// 易宝公钥
+//!         public_key: "public_key".to_string(),
+//!         /// 商户私钥
+//!         private_key: "private_key".to_string(),
+//!     }
+//! }
 //!
 //! #[tokio::test]
 //! async fn test_order_create() {
