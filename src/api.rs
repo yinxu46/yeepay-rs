@@ -78,7 +78,7 @@ post_form!(
     TransferB2CMarketResp
 );
 
-post_form!(
+get!(
     /// # 营销红包转账查询
     ///
     /// 商户通过请求该接口查询商户向用户转账的订单结果
